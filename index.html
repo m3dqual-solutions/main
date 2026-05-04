@@ -29,7 +29,7 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
     }
 
     body {
@@ -82,6 +82,13 @@
     .page {
       width: 100%;
       overflow: hidden;
+      transition: opacity .24s var(--ease), transform .24s var(--ease);
+      transform-origin: center top;
+    }
+
+    body.section-fading .page {
+      opacity: 0;
+      transform: translateY(10px);
     }
 
     .container {
@@ -874,6 +881,195 @@
       background: rgba(255,255,255,.58);
     }
 
+    .training-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .training-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.045);
+      transition: transform .38s var(--ease), box-shadow .38s var(--ease), border-color .38s var(--ease);
+      cursor: zoom-in;
+    }
+
+    .training-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.26);
+      box-shadow: 0 22px 64px rgba(0,0,0,.34);
+    }
+
+    .training-card img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: left top;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .training-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 220px;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.34));
+      z-index: 1;
+    }
+
+    .training-card-body {
+      padding: 26px;
+    }
+
+    .training-card .tag,
+    .training-item .tag {
+      display: inline-flex;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,.54);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .training-card h3,
+    .training-item h3 {
+      margin-bottom: 12px;
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .training-card p,
+    .training-item p {
+      color: rgba(255,255,255,.70);
+      font-size: 15px;
+    }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .training-item {
+      display: flex;
+      flex-direction: column;
+      min-height: 252px;
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      transition: transform .38s var(--ease), box-shadow .38s var(--ease), border-color .38s var(--ease);
+    }
+
+    .training-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.24);
+      box-shadow: 0 18px 54px rgba(0,0,0,.30);
+    }
+
+    .training-meta {
+      margin-top: auto;
+      padding-top: 22px;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .training-join {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin-top: 26px;
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      background: rgba(255,255,255,.07);
+    }
+
+    .training-join p {
+      max-width: 720px;
+      color: rgba(255,255,255,.76);
+    }
+
+    .training-join .btn {
+      flex: 0 0 auto;
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+      white-space: nowrap;
+    }
+
+    .training-modal {
+      position: fixed;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: min(96vw, 1480px);
+      max-height: 92vh;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 20px;
+      background: #070708;
+      color: var(--white);
+      box-shadow: 0 34px 120px rgba(0,0,0,.62);
+      overflow: hidden;
+    }
+
+    .training-modal::backdrop {
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .training-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(7,7,8,.92);
+    }
+
+    .training-modal-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.78);
+    }
+
+    .training-modal-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 24px;
+      line-height: 1;
+      background: rgba(255,255,255,.08);
+    }
+
+    .training-modal img {
+      display: block;
+      width: 100%;
+      max-height: calc(92vh - 67px);
+      object-fit: contain;
+      background: #070708;
+    }
+
     .method {
       background:
         linear-gradient(180deg, rgba(245,245,244,.92), rgba(255,255,255,.94));
@@ -1047,8 +1243,18 @@
       }
 
       .grid-3,
-      .steps {
+      .steps,
+      .training-showcase {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .training-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .training-join {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .menu {
@@ -1139,7 +1345,9 @@
 
       .grid-3,
       .services,
-      .steps {
+      .steps,
+      .training-showcase,
+      .training-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1149,8 +1357,26 @@
 
       .service,
       .step,
-      .card {
+      .card,
+      .training-card,
+      .training-join {
         border-radius: 18px;
+      }
+
+      .training-card {
+        min-height: auto;
+      }
+
+      .training-card img {
+        height: 170px;
+      }
+
+      .training-card::before {
+        height: 170px;
+      }
+
+      .training-join .btn {
+        width: 100%;
       }
     }
 
@@ -1394,17 +1620,93 @@
             </div>
           </div>
 
-          <ul class="training-list">
-            <li data-i18n="training.t1">Medição de Vazão e Volumes de Petróleo</li>
-            <li data-i18n="training.t2">Medição de Vazão de Gás Natural</li>
-            <li data-i18n="training.t3">Medição de Apropriação de Produção e Teste de Poços</li>
-            <li data-i18n="training.t4">Computadores de Vazão e Medição Eletrônica</li>
-            <li data-i18n="training.t5">Incerteza de Medição Aplicada à Vazão</li>
-            <li data-i18n="training.t6">Inspeção Dimensional e Conformidade Metrológica</li>
-            <li data-i18n="training.t7">Qualidade do Gás Natural</li>
-            <li data-i18n="training.t8">Processamento de Gás Natural</li>
-            <li data-i18n="training.t9">Sistemas de Flare e Vent</li>
-          </ul>
+          <div class="training-showcase">
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/qualidade-do-gas.png" data-modal-title="Qualidade do Gás Natural">
+              <img src="cursos/qualidade-do-gas.png" alt="Treinamento Qualidade do Gás Natural" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.gas.title">Qualidade do Gás Natural</h3>
+                <p data-i18n="training.gas.text">Formação para profissionais da cadeia do gás natural, biometano e biogás, cobrindo amostragem, cromatografia, contaminantes, normas, calibração e conformidade regulatória.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/flare.png" data-modal-title="Sistemas de Alívio e Despressurização">
+              <img src="cursos/flare.png" alt="Treinamento Sistemas de Alívio e Despressurização" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.flare.title">Sistemas de Alívio e Despressurização</h3>
+                <p data-i18n="training.flare.text">Treinamento aplicado a sistemas de flare e vent, com foco em projeto, dimensionamento, operação, manutenção, segurança de processo e requisitos API 521, ISO 23251 e API 537.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/medicao-petroleo.png" data-modal-title="Medição de Vazão e Volumes de Petróleo">
+              <img src="cursos/medicao-petroleo.png" alt="Treinamento Medição de Vazão e Volumes de Petróleo" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t1">Medição de Vazão e Volumes de Petróleo</h3>
+                <p data-i18n="training.t1.text">Regulações, normas aplicáveis, medição fiscal, transferência de custódia, apropriação, calibração, inspeção e parâmetros operacionais.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/teste-de-poço.png" data-modal-title="Medição de Apropriação e Teste de Poços">
+              <img src="cursos/teste-de-poço.png" alt="Treinamento Medição de Apropriação e Teste de Poços" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t3">Medição de Apropriação e Teste de Poços</h3>
+                <p data-i18n="training.t3.text">Fundamentos físicos, práticas operacionais e requisitos regulatórios para conectar teoria, campo e validação metrológica.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/processamento-do-gas.png" data-modal-title="Processamento de Gás Natural">
+              <img src="cursos/processamento-do-gas.png" alt="Treinamento Processamento de Gás Natural" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t8">Processamento de Gás Natural</h3>
+                <p data-i18n="training.t8.text">Fundamentos de UPGNs, UTGs, processamento primário, tratamento, operações unitárias e especificação do gás natural.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/computadores-de-vazão.png" data-modal-title="Computadores de Vazão e Medição Eletrônica">
+              <img src="cursos/computadores-de-vazão.png" alt="Treinamento Computadores de Vazão e Medição Eletrônica" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t4">Computadores de Vazão e Medição Eletrônica</h3>
+                <p data-i18n="training.t4.text">Cálculo, integração, totalização, registros, parametrização e impactos dos computadores de vazão na confiabilidade da medição.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/incerteza-de-medicao.png" data-modal-title="Incerteza de Medição Aplicada à Vazão">
+              <img src="cursos/incerteza-de-medicao.png" alt="Treinamento Incerteza de Medição Aplicada à Vazão" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t5">Incerteza de Medição Aplicada à Vazão</h3>
+                <p data-i18n="training.t5.text">Conceitos de incerteza, modelo matemático do mensurando, fontes de contribuição, propagação e interpretação metrológica.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+            <article class="training-card" role="button" tabindex="0" data-modal-image="cursos/inspecao-dimensional.png" data-modal-title="Inspeção Dimensional em Sistemas de Medição de Vazão">
+              <img src="cursos/inspecao-dimensional.png" alt="Treinamento Inspeção Dimensional em Sistemas de Medição de Vazão" />
+              <div class="training-card-body">
+                <span class="tag" data-i18n="training.featured">Curso em destaque</span>
+                <h3 data-i18n="training.t6">Inspeção Dimensional em Sistemas de Medição de Vazão</h3>
+                <p data-i18n="training.t6.text">Práticas metrológicas para tubos de medição, tomadas de pressão, condicionadores de escoamento e placas de orifício.</p>
+                <span class="training-meta" data-i18n="training.live">Aulas ao vivo online</span>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="training-join">
+            <p data-i18n="training.group.text">Para informações sobre qualquer treinamento, próximas turmas, carga horária, valores e inscrições, entre no grupo oficial da MED&QUAL no WhatsApp.</p>
+            <a class="btn" href="https://chat.whatsapp.com/I5Fvp6nwqgWAjvdpxkX3Dv" target="_blank" rel="noopener noreferrer" data-i18n="training.group.btn">Entrar no grupo de treinamentos</a>
+          </div>
         </div>
       </section>
 
@@ -1431,6 +1733,14 @@
         </div>
       </section>
     </main>
+
+    <dialog class="training-modal" aria-labelledby="training-modal-title">
+      <div class="training-modal-bar">
+        <span class="training-modal-title" id="training-modal-title">Treinamento MED&QUAL</span>
+        <button class="training-modal-close" type="button" aria-label="Fechar modal">&times;</button>
+      </div>
+      <img src="" alt="" />
+    </dialog>
 
     <footer>
       <div class="container footer-row">
@@ -1517,7 +1827,6 @@
         "training.title": "Capacitação para quem precisa entender como medir, por que medir e quais são os limites técnicos.",
         "training.lead": "Treinamentos ao vivo, online e interativos, com discussão de casos reais, análise de problemas operacionais, material próprio e suporte técnico durante o curso.",
         "training.t1": "Medição de Vazão e Volumes de Petróleo",
-        "training.t2": "Medição de Vazão de Gás Natural",
         "training.t3": "Medição de Apropriação de Produção e Teste de Poços",
         "training.t4": "Computadores de Vazão e Medição Eletrônica",
         "training.t5": "Incerteza de Medição Aplicada à Vazão",
@@ -1525,6 +1834,23 @@
         "training.t7": "Qualidade do Gás Natural",
         "training.t8": "Processamento de Gás Natural",
         "training.t9": "Sistemas de Flare e Vent",
+        "training.featured": "Curso em destaque",
+        "training.program": "Programa técnico",
+        "training.live": "Aulas ao vivo online",
+        "training.gas.title": "Qualidade do Gás Natural",
+        "training.gas.text": "Formação para profissionais da cadeia do gás natural, biometano e biogás, cobrindo amostragem, cromatografia, contaminantes, normas, calibração e conformidade regulatória.",
+        "training.flare.title": "Sistemas de Alívio e Despressurização",
+        "training.flare.text": "Treinamento aplicado a sistemas de flare e vent, com foco em projeto, dimensionamento, operação, manutenção, segurança de processo e requisitos API 521, ISO 23251 e API 537.",
+        "training.t1.text": "Regulações, normas aplicáveis, medição fiscal, transferência de custódia, apropriação, calibração, inspeção e parâmetros operacionais.",
+        "training.t3": "Medição de Apropriação e Teste de Poços",
+        "training.t3.text": "Fundamentos físicos, práticas operacionais e requisitos regulatórios para conectar teoria, campo e validação metrológica.",
+        "training.t4.text": "Cálculo, integração, totalização, registros, parametrização e impactos dos computadores de vazão na confiabilidade da medição.",
+        "training.t5.text": "Conceitos de incerteza, modelo matemático do mensurando, fontes de contribuição, propagação e interpretação metrológica.",
+        "training.t6": "Inspeção Dimensional em Sistemas de Medição de Vazão",
+        "training.t6.text": "Práticas metrológicas para tubos de medição, tomadas de pressão, condicionadores de escoamento e placas de orifício.",
+        "training.t8.text": "Fundamentos de UPGNs, UTGs, processamento primário, tratamento, operações unitárias e especificação do gás natural.",
+        "training.group.text": "Para informações sobre qualquer treinamento, próximas turmas, carga horária, valores e inscrições, entre no grupo oficial da MED&QUAL no WhatsApp.",
+        "training.group.btn": "Entrar no grupo de treinamentos",
         "position.number": "05 / Posicionamento",
         "position.title": "Problemas reais, análise técnica e soluções engenheiradas.",
         "position.lead": "Todo treinamento e toda consultoria da MED&QUAL parte de problemas reais enfrentados em sistemas de medição e processamento industrial, transformando dados, documentação e registros operacionais em soluções rastreáveis e tecnicamente defensáveis.",
@@ -1607,7 +1933,6 @@
         "training.title": "Training for professionals who need to understand how to measure, why to measure and the technical limits involved.",
         "training.lead": "Live, online and interactive training with real case discussions, operational problem analysis, proprietary material and technical support during the course.",
         "training.t1": "Oil Flow and Volume Measurement",
-        "training.t2": "Natural Gas Flow Measurement",
         "training.t3": "Production Allocation Measurement and Well Testing",
         "training.t4": "Flow Computers and Electronic Measurement",
         "training.t5": "Measurement Uncertainty Applied to Flow",
@@ -1615,6 +1940,23 @@
         "training.t7": "Natural Gas Quality",
         "training.t8": "Natural Gas Processing",
         "training.t9": "Flare and Vent Systems",
+        "training.featured": "Featured course",
+        "training.program": "Technical program",
+        "training.live": "Live online classes",
+        "training.gas.title": "Natural Gas Quality",
+        "training.gas.text": "Training for professionals in the natural gas, biomethane and biogas chain, covering sampling, chromatography, contaminants, standards, calibration and regulatory compliance.",
+        "training.flare.title": "Relief and Depressurization Systems",
+        "training.flare.text": "Applied training for flare and vent systems, focused on design, sizing, operation, maintenance, process safety and API 521, ISO 23251 and API 537 requirements.",
+        "training.t1.text": "Regulations, applicable standards, fiscal measurement, custody transfer, allocation, calibration, inspection and operational parameters.",
+        "training.t3": "Production Allocation Measurement and Well Testing",
+        "training.t3.text": "Physical fundamentals, operational practices and regulatory requirements connecting theory, field reality and metrological validation.",
+        "training.t4.text": "Calculation, integration, totalization, records, parameterization and the impact of flow computers on measurement reliability.",
+        "training.t5.text": "Uncertainty concepts, mathematical model of the measurand, contribution sources, propagation and metrological interpretation.",
+        "training.t6": "Dimensional Inspection in Flow Measurement Systems",
+        "training.t6.text": "Metrological practices for meter tubes, pressure taps, flow conditioners and orifice plates.",
+        "training.t8.text": "Fundamentals of gas processing units, treatment units, primary processing, treatment, unit operations and natural gas specification.",
+        "training.group.text": "For information about any training program, upcoming classes, workload, pricing and registration, join the official MED&QUAL WhatsApp group.",
+        "training.group.btn": "Join the training group",
         "position.number": "05 / Positioning",
         "position.title": "Real problems, technical analysis and engineered solutions.",
         "position.lead": "Every MED&QUAL training and consulting service starts from real problems found in measurement and industrial processing systems, transforming data, documentation and operational records into traceable and technically defensible solutions.",
@@ -1672,7 +2014,7 @@
     window.addEventListener("scroll", updateScrollState, { passive: true });
     updateScrollState();
 
-    const revealElements = document.querySelectorAll("section, .card, .service, .step, .profile-box, .hero-card");
+    const revealElements = document.querySelectorAll("section, .card, .service, .step, .profile-box, .hero-card, .training-card, .training-item, .training-join");
     revealElements.forEach((element) => element.classList.add("reveal"));
 
     const observer = new IntersectionObserver((entries) => {
@@ -1686,7 +2028,7 @@
 
     revealElements.forEach((element) => observer.observe(element));
 
-    document.querySelectorAll(".hero-card, .card, .service, .step").forEach((element) => {
+    document.querySelectorAll(".hero-card, .card, .service, .step, .training-card, .training-item").forEach((element) => {
       element.addEventListener("pointermove", (event) => {
         const rect = element.getBoundingClientRect();
         element.style.setProperty("--mx", `${event.clientX - rect.left}px`);
@@ -1694,9 +2036,92 @@
       });
     });
 
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
+
+        const target = document.querySelector(hash);
+        if (!target) return;
+
+        event.preventDefault();
+        document.body.classList.add("section-fading");
+
+        window.setTimeout(() => {
+          target.scrollIntoView({ block: "start", behavior: "auto" });
+          history.pushState(null, "", hash);
+
+          window.setTimeout(() => {
+            document.body.classList.remove("section-fading");
+          }, 60);
+        }, 220);
+      });
+    });
+
+    const trainingModal = document.querySelector(".training-modal");
+    const trainingModalImage = trainingModal ? trainingModal.querySelector("img") : null;
+    const trainingModalTitle = trainingModal ? trainingModal.querySelector(".training-modal-title") : null;
+    const trainingModalClose = trainingModal ? trainingModal.querySelector(".training-modal-close") : null;
+
+    function openTrainingModal(card) {
+      if (!trainingModal || !trainingModalImage) return;
+      const image = card.getAttribute("data-modal-image");
+      if (!image) return;
+
+      const title = card.querySelector("h3") ? card.querySelector("h3").textContent.trim() : card.getAttribute("data-modal-title") || "Treinamento MED&QUAL";
+      trainingModalImage.src = image;
+      trainingModalImage.alt = title;
+      if (trainingModalTitle) trainingModalTitle.textContent = title;
+
+      if (typeof trainingModal.showModal === "function") {
+        trainingModal.showModal();
+      } else {
+        trainingModal.setAttribute("open", "");
+      }
+    }
+
+    document.querySelectorAll(".training-card[data-modal-image]").forEach((card) => {
+      card.addEventListener("click", () => openTrainingModal(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openTrainingModal(card);
+        }
+      });
+    });
+
+    if (trainingModalClose && trainingModal) {
+      trainingModalClose.addEventListener("click", () => trainingModal.close());
+      trainingModal.addEventListener("click", (event) => {
+        if (event.target === trainingModal) trainingModal.close();
+      });
+      trainingModal.addEventListener("close", () => {
+        if (trainingModalImage) trainingModalImage.removeAttribute("src");
+      });
+    }
+
+    const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwVYg7az9gkeWSijLTJaln6KqpoxWdpX_CFJXaYcecGGTYKW0Y9f2f7Te5ZeeZW_-2kLQ/exec";
+
+    function registerPortfolioEmail(email, lang) {
+      if (!GOOGLE_SHEETS_ENDPOINT) return Promise.resolve();
+
+      const payload = new FormData();
+      payload.append("email", email);
+      payload.append("language", lang);
+      payload.append("source", "portfolio-form");
+      payload.append("page", window.location.href);
+      payload.append("userAgent", navigator.userAgent || "");
+
+      return fetch(GOOGLE_SHEETS_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        body: payload
+      }).catch(() => {});
+    }
+
     const portfolioForm = document.querySelector(".portfolio-form");
     if (portfolioForm) {
-      portfolioForm.addEventListener("submit", (event) => {
+      portfolioForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const input = portfolioForm.querySelector('input[type="email"]');
@@ -1710,17 +2135,20 @@
         }
 
         const lang = localStorage.getItem("medqual-language") || "pt";
-        const message = lang === "en"
-          ? `Hello, I would like to receive the complete MED&QUAL portfolio. My best email is: ${email}`
-          : `Olá, gostaria de receber o portfólio completo da MED&QUAL. Meu melhor e-mail é: ${email}`;
+        if (feedback) {
+          feedback.textContent = lang === "en"
+            ? "Registering your email..."
+            : "Registrando seu e-mail...";
+        }
+
+        await registerPortfolioEmail(email, lang);
+        portfolioForm.reset();
 
         if (feedback) {
           feedback.textContent = lang === "en"
-            ? "Opening WhatsApp to request the portfolio..."
-            : "Abrindo o WhatsApp para solicitar o portfólio...";
+            ? "Email registered. We will send the portfolio soon."
+            : "E-mail registrado. Enviaremos o portfólio em breve.";
         }
-
-        window.open(`https://wa.me/5584998370385?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
       });
     }
 

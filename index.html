@@ -622,6 +622,19 @@
       font-size: 12px;
     }
 
+    .portfolio-download {
+      display: none;
+      width: 100%;
+      margin-top: 14px;
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .portfolio-download.is-visible {
+      display: inline-flex;
+    }
+
     section {
       position: relative;
       padding: 112px 0;
@@ -1441,13 +1454,14 @@
           <aside class="hero-card" aria-label="Portfólio MED&QUAL">
             <div class="hero-note">
               <span class="mini-label" data-i18n="hero.form.label">Portfólio MED&QUAL</span>
-              <strong data-i18n="hero.form.title">Receba o portfólio completo e detalhado.</strong>
-              <div class="form-copy" data-i18n="hero.form.text">Deixe seu melhor e-mail para receber a apresentação técnica dos serviços e treinamentos.</div>
+              <strong data-i18n="hero.form.title">Baixe o portfólio completo e detalhado.</strong>
+              <div class="form-copy" data-i18n="hero.form.text">Deixe seu melhor e-mail para liberar o download da apresentação técnica dos serviços e treinamentos.</div>
               <form class="portfolio-form">
                 <input type="email" name="email" data-i18n-placeholder="hero.form.placeholder" placeholder="Seu melhor e-mail" aria-label="Seu melhor e-mail" required />
-                <button type="submit" data-i18n="hero.form.button">Receber</button>
+                <button type="submit" data-i18n="hero.form.button">Liberar download</button>
               </form>
               <span class="form-feedback" aria-live="polite"></span>
+              <a class="btn portfolio-download" href="cursos/PORTIFÓLIO DE SERVIÇOS EXTENDIDO .pdf" download data-i18n="hero.form.download">Baixar portfólio</a>
             </div>
           </aside>
         </div>
@@ -1770,10 +1784,11 @@
         "hero.btn3": "Contate-nos",
         "hero.card": "Atuação fundamentada em rigor normativo, análise crítica e rastreabilidade metrológica para auditorias, fiscalizações, disputas técnicas e decisões de engenharia.",
         "hero.form.label": "Portfólio MED&QUAL",
-        "hero.form.title": "Receba o portfólio completo e detalhado.",
-        "hero.form.text": "Deixe seu melhor e-mail para receber a apresentação técnica dos serviços e treinamentos.",
+        "hero.form.title": "Baixe o portfólio completo e detalhado.",
+        "hero.form.text": "Deixe seu melhor e-mail para liberar o download da apresentação técnica dos serviços e treinamentos.",
         "hero.form.placeholder": "Seu melhor e-mail",
-        "hero.form.button": "Receber",
+        "hero.form.button": "Liberar download",
+        "hero.form.download": "Baixar portfólio",
         "about.number": "01 / Apresentação",
         "about.title": "Precisão técnica para decisões que precisam resistir à auditoria.",
         "about.lead": "A MED&QUAL integra fundamentos físicos, prática operacional e requisitos regulatórios para entregar análises técnicas consistentes, rastreáveis e adequadas ao ambiente industrial de óleo e gás.",
@@ -1876,10 +1891,11 @@
         "hero.btn3": "Contact us",
         "hero.card": "Work based on regulatory rigor, critical analysis and metrological traceability for audits, inspections, technical disputes and engineering decisions.",
         "hero.form.label": "MED&QUAL portfolio",
-        "hero.form.title": "Receive the complete and detailed portfolio.",
-        "hero.form.text": "Leave your best email to receive the technical presentation of services and training programs.",
+        "hero.form.title": "Download the complete and detailed portfolio.",
+        "hero.form.text": "Leave your best email to unlock the download of the technical presentation of services and training programs.",
         "hero.form.placeholder": "Your best email",
-        "hero.form.button": "Receive",
+        "hero.form.button": "Unlock download",
+        "hero.form.download": "Download portfolio",
         "about.number": "01 / Overview",
         "about.title": "Technical precision for decisions that must withstand audit scrutiny.",
         "about.lead": "MED&QUAL combines physical fundamentals, operational practice and regulatory requirements to deliver consistent, traceable technical analyses suited to oil and gas industrial environments.",
@@ -2126,6 +2142,7 @@
 
         const input = portfolioForm.querySelector('input[type="email"]');
         const feedback = document.querySelector(".form-feedback");
+        const downloadLink = document.querySelector(".portfolio-download");
         const email = input ? input.value.trim() : "";
 
         if (!email || !input.checkValidity()) {
@@ -2146,8 +2163,13 @@
 
         if (feedback) {
           feedback.textContent = lang === "en"
-            ? "Email registered. We will send the portfolio soon."
-            : "E-mail registrado. Enviaremos o portfólio em breve.";
+            ? "Email registered. Your portfolio download is available below."
+            : "E-mail registrado. O download do portfólio está liberado abaixo.";
+        }
+
+        if (downloadLink) {
+          downloadLink.classList.add("is-visible");
+          downloadLink.focus();
         }
       });
     }

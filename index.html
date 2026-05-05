@@ -622,8 +622,15 @@
       font-size: 12px;
     }
 
+    .privacy-note {
+      margin-top: 10px;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
     .portfolio-download {
-      display: none;
+      display: inline-flex;
       width: 100%;
       margin-top: 14px;
       background: var(--white);
@@ -1488,11 +1495,12 @@
             <div class="hero-note">
               <span class="mini-label" data-i18n="hero.form.label">Portfólio MED&QUAL</span>
               <strong data-i18n="hero.form.title">Baixe o portfólio completo e detalhado.</strong>
-              <div class="form-copy" data-i18n="hero.form.text">Deixe seu melhor e-mail para liberar o download da apresentação técnica dos serviços e treinamentos.</div>
+              <div class="form-copy" data-i18n="hero.form.text">O download está disponível abaixo. Se quiser receber contato técnico, informe seu e-mail.</div>
               <form class="portfolio-form">
                 <input type="email" name="email" data-i18n-placeholder="hero.form.placeholder" placeholder="Seu melhor e-mail" aria-label="Seu melhor e-mail" required />
-                <button type="submit" data-i18n="hero.form.button">Liberar download</button>
+                <button type="submit" data-i18n="hero.form.button">Solicitar contato</button>
               </form>
+              <div class="privacy-note" data-i18n="hero.form.privacy">Usaremos seu e-mail apenas para retorno técnico sobre serviços e treinamentos MED&QUAL.</div>
               <span class="form-feedback" aria-live="polite"></span>
               <a class="btn portfolio-download" href="cursos/PORTIFÓLIO DE SERVIÇOS EXTENDIDO .pdf" download data-i18n="hero.form.download">Baixar portfólio</a>
             </div>
@@ -1838,9 +1846,10 @@
         "hero.card": "Atuação fundamentada em rigor normativo, análise crítica e rastreabilidade metrológica para auditorias, fiscalizações, disputas técnicas e decisões de engenharia.",
         "hero.form.label": "Portfólio MED&QUAL",
         "hero.form.title": "Baixe o portfólio completo e detalhado.",
-        "hero.form.text": "Deixe seu melhor e-mail para liberar o download da apresentação técnica dos serviços e treinamentos.",
+        "hero.form.text": "O download está disponível abaixo. Se quiser receber contato técnico, informe seu e-mail.",
         "hero.form.placeholder": "Seu melhor e-mail",
-        "hero.form.button": "Liberar download",
+        "hero.form.button": "Solicitar contato",
+        "hero.form.privacy": "Usaremos seu e-mail apenas para retorno técnico sobre serviços e treinamentos MED&QUAL.",
         "hero.form.download": "Baixar portfólio",
         "about.number": "01 / Apresentação",
         "about.title": "Precisão técnica para decisões que precisam resistir à auditoria.",
@@ -1949,9 +1958,10 @@
         "hero.card": "Work based on regulatory rigor, critical analysis and metrological traceability for audits, inspections, technical disputes and engineering decisions.",
         "hero.form.label": "MED&QUAL portfolio",
         "hero.form.title": "Download the complete and detailed portfolio.",
-        "hero.form.text": "Leave your best email to unlock the download of the technical presentation of services and training programs.",
+        "hero.form.text": "The download is available below. If you would like a technical follow-up, enter your email.",
         "hero.form.placeholder": "Your best email",
-        "hero.form.button": "Unlock download",
+        "hero.form.button": "Request follow-up",
+        "hero.form.privacy": "We will use your email only for technical follow-up about MED&QUAL services and training.",
         "hero.form.download": "Download portfolio",
         "about.number": "01 / Overview",
         "about.title": "Technical precision for decisions that must withstand audit scrutiny.",
@@ -2177,25 +2187,22 @@
       });
     }
 
-    // TEMP TEST 2026-05-05: lead capture disabled to verify Palo Alto/DNS classification.
-    // Revert from index.TEST-BEFORE-GOOGLE-SHEETS-DISABLE.html after the network test.
-    const GOOGLE_SHEETS_ENDPOINT = "";
+    // Corporate-friendly lead capture: use a same-origin endpoint.
+    // Avoid public third-party endpoints in the browser so corporate firewalls see only medqual.com.br.
+    const LEAD_CAPTURE_ENDPOINT = "/api/portfolio-leads";
 
     function registerPortfolioEmail(email, lang) {
-      if (!GOOGLE_SHEETS_ENDPOINT) return Promise.resolve();
-
-      const payload = new FormData();
-      payload.append("email", email);
-      payload.append("language", lang);
-      payload.append("source", "portfolio-form");
-      payload.append("page", window.location.href);
-      payload.append("userAgent", navigator.userAgent || "");
-
-      return fetch(GOOGLE_SHEETS_ENDPOINT, {
+      return fetch(LEAD_CAPTURE_ENDPOINT, {
         method: "POST",
-        mode: "no-cors",
-        body: payload
-      }).catch(() => {});
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email,
+          language: lang,
+          source: "portfolio-form"
+        })
+      }).then((response) => response.ok).catch(() => false);
     }
 
     const portfolioForm = document.querySelector(".portfolio-form");
@@ -2205,7 +2212,6 @@
 
         const input = portfolioForm.querySelector('input[type="email"]');
         const feedback = document.querySelector(".form-feedback");
-        const downloadLink = document.querySelector(".portfolio-download");
         const email = input ? input.value.trim() : "";
 
         if (!email || !input.checkValidity()) {
@@ -2221,18 +2227,17 @@
             : "Registrando seu e-mail...";
         }
 
-        await registerPortfolioEmail(email, lang);
+        const registered = await registerPortfolioEmail(email, lang);
         portfolioForm.reset();
 
         if (feedback) {
-          feedback.textContent = lang === "en"
-            ? "Email registered. Your portfolio download is available below."
-            : "E-mail registrado. O download do portfólio está liberado abaixo.";
-        }
-
-        if (downloadLink) {
-          downloadLink.classList.add("is-visible");
-          downloadLink.focus();
+          feedback.textContent = registered
+            ? (lang === "en"
+              ? "Email registered. We will contact you soon."
+              : "E-mail registrado. Entraremos em contato em breve.")
+            : (lang === "en"
+              ? "We could not register the email right now. The portfolio remains available below."
+              : "Não foi possível registrar o e-mail agora. O portfólio continua disponível abaixo.");
         }
       });
     }

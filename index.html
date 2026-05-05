@@ -2177,7 +2177,9 @@
       });
     }
 
-    const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbwVYg7az9gkeWSijLTJaln6KqpoxWdpX_CFJXaYcecGGTYKW0Y9f2f7Te5ZeeZW_-2kLQ/exec";
+    // TEMP TEST 2026-05-05: lead capture disabled to verify Palo Alto/DNS classification.
+    // Revert from index.TEST-BEFORE-GOOGLE-SHEETS-DISABLE.html after the network test.
+    const GOOGLE_SHEETS_ENDPOINT = "";
 
     function registerPortfolioEmail(email, lang) {
       if (!GOOGLE_SHEETS_ENDPOINT) return Promise.resolve();

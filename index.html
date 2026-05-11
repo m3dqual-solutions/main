@@ -655,6 +655,132 @@
       text-transform: uppercase;
     }
 
+    .section-side {
+      display: grid;
+      gap: 28px;
+      align-content: start;
+    }
+
+    .whatsapp-group-cta {
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      width: min(350px, 100%);
+      min-height: 92px;
+      padding: 18px 20px;
+      border: 1px solid rgba(37, 211, 102, 0.46);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(37, 211, 102, 0.22), rgba(255,255,255,0.055) 46%, rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.045);
+      color: var(--white);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 20px 54px rgba(0,0,0,.24),
+        0 0 0 1px rgba(37, 211, 102, 0.08);
+      overflow: hidden;
+      transition: transform .32s var(--ease), border-color .32s var(--ease), box-shadow .32s var(--ease), background .32s var(--ease);
+    }
+
+    .whatsapp-group-cta::before {
+      content: "";
+      position: absolute;
+      inset: -42% auto auto -20%;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(37, 211, 102, 0.30);
+      filter: blur(24px);
+      z-index: -1;
+      animation: whatsappPulse 3.8s var(--ease) infinite;
+    }
+
+    .whatsapp-group-cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 44%, transparent 64%);
+      transform: translateX(-120%);
+      transition: transform .8s var(--ease);
+    }
+
+    .whatsapp-group-cta:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37, 211, 102, 0.78);
+      background:
+        linear-gradient(135deg, rgba(37, 211, 102, 0.30), rgba(255,255,255,0.07) 48%, rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.065);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 28px 70px rgba(0,0,0,.34),
+        0 0 0 1px rgba(37, 211, 102, 0.22);
+    }
+
+    .whatsapp-group-cta:hover::after {
+      transform: translateX(120%);
+    }
+
+    .whatsapp-group-icon {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #25d366;
+      color: #071009;
+      box-shadow: 0 12px 28px rgba(37, 211, 102, 0.30);
+    }
+
+    .whatsapp-group-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .whatsapp-group-copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .whatsapp-group-kicker {
+      color: rgba(255,255,255,.58);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .whatsapp-group-title {
+      color: var(--white);
+      font-family: "Bahnschrift", "Agency FB", "Arial Narrow", "Segoe UI", Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .whatsapp-group-note {
+      color: rgba(255,255,255,.66);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    @keyframes whatsappPulse {
+      0%, 100% {
+        opacity: .48;
+        transform: scale(.92);
+      }
+      50% {
+        opacity: .95;
+        transform: scale(1.12);
+      }
+    }
+
     .section-brand {
       display: grid;
       gap: 28px;
@@ -1328,6 +1454,10 @@
         gap: 18px;
       }
 
+      .section-side {
+        gap: 18px;
+      }
+
       .about-logo {
         width: min(460px, 72vw);
       }
@@ -1469,6 +1599,17 @@
 
       .training-card::before {
         height: 170px;
+      }
+
+      .whatsapp-group-cta {
+        width: 100%;
+        min-height: 84px;
+        padding: 16px 18px;
+        border-radius: 18px;
+      }
+
+      .whatsapp-group-title {
+        font-size: 16px;
       }
 
       .training-join .btn {
@@ -1710,7 +1851,21 @@
       <section id="treinamentos" class="dark">
         <div class="container">
           <div class="section-head">
-            <span class="section-number" data-i18n="training.number">04 / Treinamentos técnicos</span>
+            <div class="section-side">
+              <span class="section-number" data-i18n="training.number">04 / Treinamentos técnicos</span>
+              <a class="whatsapp-group-cta" href="https://chat.whatsapp.com/I5Fvp6nwqgWAjvdpxkX3Dv" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de treinamentos da MED&QUAL no WhatsApp">
+                <span class="whatsapp-group-icon" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" focusable="false">
+                    <path d="M16.04 3.2A12.69 12.69 0 0 0 5.1 22.35L3.8 28.8l6.6-1.28A12.69 12.69 0 1 0 16.04 3.2Zm0 22.9c-1.88 0-3.72-.52-5.32-1.51l-.38-.23-3.9.76.77-3.8-.25-.39a10.27 10.27 0 1 1 9.08 5.17Zm5.95-7.69c-.33-.17-1.93-.95-2.23-1.06-.3-.11-.52-.17-.74.17-.22.33-.85 1.06-1.04 1.28-.19.22-.38.25-.71.08-.33-.17-1.38-.51-2.64-1.63-.98-.87-1.64-1.95-1.83-2.28-.19-.33-.02-.51.14-.67.15-.15.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.17-.74-1.79-1.01-2.45-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.15 1.12-1.15 2.74s1.18 3.18 1.34 3.4c.16.22 2.32 3.54 5.62 4.96.79.34 1.4.54 1.88.69.79.25 1.51.21 2.08.13.63-.09 1.93-.79 2.21-1.55.27-.76.27-1.42.19-1.55-.08-.14-.3-.22-.63-.39Z" />
+                  </svg>
+                </span>
+                <span class="whatsapp-group-copy">
+                  <span class="whatsapp-group-kicker" data-i18n="training.group.kicker">Grupo oficial</span>
+                  <span class="whatsapp-group-title" data-i18n="training.group.cardTitle">Entrar no WhatsApp</span>
+                  <span class="whatsapp-group-note" data-i18n="training.group.note">Turmas, avisos e inscrições</span>
+                </span>
+              </a>
+            </div>
             <div>
               <h2 data-i18n="training.title">Capacitação para quem precisa entender como medir, por que medir e quais são os limites técnicos.</h2>
               <p class="lead" data-i18n="training.lead">Treinamentos ao vivo, online e interativos, com discussão de casos reais, análise de problemas operacionais, material próprio e suporte técnico durante o curso.</p>
@@ -1957,6 +2112,9 @@
         "training.featured": "Curso em destaque",
         "training.program": "Programa técnico",
         "training.live": "Aulas ao vivo online",
+        "training.group.kicker": "Grupo oficial",
+        "training.group.cardTitle": "Entrar no WhatsApp",
+        "training.group.note": "Turmas, avisos e inscrições",
         "training.gas.title": "Qualidade do Gás Natural",
         "training.gas.text": "Formação para profissionais da cadeia do gás natural, biometano e biogás, cobrindo amostragem, cromatografia, contaminantes, normas, calibração e conformidade regulatória.",
         "training.flare.title": "Sistemas de Alívio e Despressurização",
@@ -2068,6 +2226,9 @@
         "training.featured": "Featured course",
         "training.program": "Technical program",
         "training.live": "Live online classes",
+        "training.group.kicker": "Official group",
+        "training.group.cardTitle": "Join WhatsApp",
+        "training.group.note": "Classes, updates and registration",
         "training.gas.title": "Natural Gas Quality",
         "training.gas.text": "Training for professionals in the natural gas, biomethane and biogas chain, covering sampling, chromatography, contaminants, standards, calibration and regulatory compliance.",
         "training.flare.title": "Relief and Depressurization Systems",
